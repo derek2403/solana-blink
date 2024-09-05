@@ -20,8 +20,8 @@ export default function handler(req, res) {
     const payload = {
   "icon": "a",
   "label": "NFT Creation",
-  "title": "Shit NFT",
-  "description": "Create your own unique shit NFT with us. Immutable and digitally signed for proof of authenticity.",
+  "title": "Untitled NFT",
+  "description": "No description provided.",
   "links": {
     "actions": [
       {

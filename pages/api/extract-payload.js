@@ -4,7 +4,7 @@ import path from 'path';
 
 // Initialize OpenAI API
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: process.env.NEXT_PUBLIC_API_URL
 });
 
 export default async function handler(req, res) {
