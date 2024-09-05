@@ -1,0 +1,6 @@
+{
+    "rules": {
+        "pathPattern": "/api/actions/buyNFT",
+        "apiPath": "/api/actions/buyNFT"
+    }
+}
