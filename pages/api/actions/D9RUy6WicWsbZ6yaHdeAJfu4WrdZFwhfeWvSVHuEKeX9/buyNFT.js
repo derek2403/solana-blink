@@ -1,4 +1,3 @@
-// pages/api/actions/buy-nft.js
 
 import { ActionGetResponse } from "@solana/actions";
 
@@ -19,19 +18,19 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-      icon: "a",
-      label: "b",
-      title: "c",
-      description: "d",
-      links: {
-        actions: [
-          {
-            label: "e",
-            href: "/api/signTransaction",
-          }
-        ]
+  "icon": "a",
+  "label": "NFT Creation",
+  "title": "Shit NFT",
+  "description": "Create your own unique shit NFT with us. Immutable and digitally signed for proof of authenticity.",
+  "links": {
+    "actions": [
+      {
+        "label": "Default Button Label",
+        "href": "/api/signTransaction"
       }
-    };
+    ]
+  }
+};
 
     res.writeHead(200, ACTIONS_CORS_HEADERS);
     res.end(JSON.stringify(payload));
@@ -41,3 +40,4 @@ export default function handler(req, res) {
   res.writeHead(405, ACTIONS_CORS_HEADERS);
   res.end(JSON.stringify({ error: 'Method Not Allowed' }));
 }
+    

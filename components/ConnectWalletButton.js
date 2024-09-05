@@ -1,15 +1,16 @@
-// components/ConnectWalletButton.js
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useEffect } from 'react';
 
-export default function ConnectWalletButton() {
+export default function ConnectWalletButton({ setWalletAddress }) {
     const { publicKey, connected } = useWallet();
     const walletAddress = connected && publicKey ? publicKey.toBase58() : 'Not connected';
 
     useEffect(() => {
         if (connected && walletAddress !== 'Not connected') {
-            // Make a request to the API to create the folder
+            setWalletAddress(walletAddress); // Update the parent component's state with wallet address
+
+            // Optional: Make a request to the API to create the folder (as you had previously)
             fetch(`/api/create-folder`, {
                 method: 'POST',
                 headers: {
