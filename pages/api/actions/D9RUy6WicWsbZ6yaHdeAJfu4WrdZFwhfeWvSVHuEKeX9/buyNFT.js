@@ -1,3 +1,4 @@
+// pages/api/actions/donate.js
 
 import { ActionGetResponse } from "@solana/actions";
 
@@ -18,19 +19,37 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-  "icon": "a",
-  "label": "NFT Creation",
-  "title": "Untitled NFT",
-  "description": "No description provided.",
-  "links": {
-    "actions": [
-      {
-        "label": "Default Button Label",
-        "href": "/api/signTransaction"
-      }
-    ]
-  }
-};
+      icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s",
+      label: "Donate to Alice",
+      title: "Donate to Alice",
+      description: "Cybersecurity Enthusiast | Support my research with a donation.",
+      links: {
+        actions: [
+          {
+            label: "1 SOL",
+            href: "../../donate?amount=1",
+          },
+          {
+            label: "5 SOL",
+            href: "../../donate?amount=5",
+          },
+          {
+            label: "10 SOL",
+            href: "../../donate?amount=10",
+          },
+          {
+            "label": "Buy WIF", // button text
+            "href": "../../donate?amount={amount}",
+            "parameters": [
+              {
+                "name": "amount", // field name
+                "label": "Enter a custom USD amount" // text input placeholder
+              }
+            ]
+          }
+        ]
+      },
+    };
 
     res.writeHead(200, ACTIONS_CORS_HEADERS);
     res.end(JSON.stringify(payload));
@@ -40,4 +59,3 @@ export default function handler(req, res) {
   res.writeHead(405, ACTIONS_CORS_HEADERS);
   res.end(JSON.stringify({ error: 'Method Not Allowed' }));
 }
-    

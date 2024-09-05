@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
-    "rules": {
-        "pathPattern": "/api/actions/buyNFT",
-        "apiPath": "/api/actions/buyNFT"
-    }
-}
-=======
     "rules": [
       {
         "pathPattern": "/api/actions/buyNFT",
@@ -17,4 +10,3 @@
       }
     ]
   }
->>>>>>> jy

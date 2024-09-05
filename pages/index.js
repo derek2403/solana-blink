@@ -7,13 +7,9 @@ import { useActionSolanaWalletAdapter } from "@dialectlabs/blinks/hooks/solana";
 
 export default function Home() {
     const { publicKey, connected } = useWallet();
-<<<<<<< HEAD
-
-=======
->>>>>>> jy
     const walletAddress = connected && publicKey ? publicKey.toBase58() : 'Not connected';
 
-    const actionApiUrl = 'http://localhost:3000/api/actions/donate';
+    const actionApiUrl = 'http://localhost:3000/api/actions/D9RUy6WicWsbZ6yaHdeAJfu4WrdZFwhfeWvSVHuEKeX9/buyNFT';
 
     const { adapter } = useActionSolanaWalletAdapter('https://api.devnet.solana.com');
     const { action, error } = useAction({ url: actionApiUrl, adapter });

@@ -19,15 +19,15 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-      icon: "a",
-      label: "b",
-      title: "c",
-      description: "d",
+        icon: "a",
+        label: "b",
+        title: "c",
+        description: "Cybersecurity Enthusiast | Support my research with a donation.",
       links: {
         actions: [
           {
             label: "e",
-            href: "/api/signTransaction",
+            href: "/api/donate",
           }
         ]
       }
