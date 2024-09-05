@@ -3,6 +3,10 @@
       {
         "pathPattern": "/api/actions/buyNFT",
         "apiPath": "/api/actions/buyNFT"
+      },
+      {
+        "pathPattern": "/api/actions/donate",
+        "apiPath": "/api/actions/donate"
       }
     ]
   }

@@ -9,7 +9,7 @@ export default function Home() {
     const { publicKey, connected } = useWallet();
     const walletAddress = connected && publicKey ? publicKey.toBase58() : 'Not connected';
 
-    const actionApiUrl = 'http://localhost:3000/api/actions/buyNFT';
+    const actionApiUrl = 'http://localhost:3000/api/actions/donate';
 
     const { adapter } = useActionSolanaWalletAdapter('https://api.devnet.solana.com');
     const { action, error } = useAction({ url: actionApiUrl, adapter });
