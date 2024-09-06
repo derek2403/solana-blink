@@ -19,7 +19,7 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-        icon: "a",
+        icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s",
         label: "b",
         title: "c",
         description: "Cybersecurity Enthusiast | Support my research with a donation.",
