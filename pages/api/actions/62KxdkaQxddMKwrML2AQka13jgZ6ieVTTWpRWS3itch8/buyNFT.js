@@ -19,13 +19,13 @@ export default function handler(req, res) {
   if (req.method === 'GET') {
     const payload = {
   "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s",
-  "label": "nft creation",
-  "title": "create your unique nft",
-  "description": "design and mint your very own non-fungible token. showcase your creativity and secure your digital asset on the blockchain.",
+  "label": "nft",
+  "title": "digital book nft",
+  "description": "own a unique digital copy of a book in the form of an nft. this ensures authenticity and grants you special access and privileges related to the digital content.",
   "links": {
     "actions": [
       {
-        "label": "mint nft",
+        "label": "create nft",
         "href": "/api/signTransaction"
       }
     ]

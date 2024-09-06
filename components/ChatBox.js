@@ -68,7 +68,6 @@ export default function ChatBox({ walletAddress }) {
           Action Link: <a href={actionApiUrl} target="_blank" rel="noopener noreferrer">{actionApiUrl}</a>
         </p>
       )}
-      {showPopup && <ActionPopup actionApiUrl={actionApiUrl} onClose={() => setShowPopup(false)} />}
     </div>
   );
 }

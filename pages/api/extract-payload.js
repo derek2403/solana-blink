@@ -69,7 +69,6 @@ export default async function handler(req, res) {
       }
     });
     
-
     // Validate that the extracted data is not empty
     if (!extractedPayload.label || !extractedPayload.title || !extractedPayload.description || !extractedPayload.buttonLabel) {
       throw new Error('AI response did not generate the expected payload fields.');
@@ -131,9 +130,35 @@ export default function handler(req, res) {
 
     fs.writeFileSync(filePath, fileContent);
 
-    res.status(200).json({ message: 'NFT creation payload has been saved successfully!' });
+    // Amend the /public/action.js file
+    const actionFilePath = path.join(process.cwd(), 'public', 'actions.json');
+    let actionFileContent = {};
+
+    if (fs.existsSync(actionFilePath)) {
+      const existingContent = fs.readFileSync(actionFilePath, 'utf8');
+      try {
+        actionFileContent = JSON.parse(existingContent);
+      } catch (error) {
+        console.error('Error parsing existing action.js:', error);
+      }
+    }
+
+    if (!actionFileContent.rules) {
+      actionFileContent.rules = [];
+    }
+
+    // Add the new rule
+    actionFileContent.rules.push({
+      "pathPattern": `/api/actions/${walletAddress}/buyNFT`,
+      "apiPath": `/api/actions/${walletAddress}/buyNFT`
+    });
+
+    // Write the updated content back to action.js
+    fs.writeFileSync(actionFilePath, JSON.stringify(actionFileContent, null, 2));
+
+    res.status(200).json({ message: 'NFT creation payload has been saved successfully and action.js has been updated!' });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ message: 'An error occurred while extracting the payload', error: error.message });
+    res.status(500).json({ message: 'An error occurred while processing the request', error: error.message });
   }
 }
