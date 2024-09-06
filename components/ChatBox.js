@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import ActionPopup from './ActionPopup'; // Import the ActionPopup component
+import BlinkPreview from './DynamicBlink'; // Make sure the import path is correct
 
 export default function ChatBox({ walletAddress }) {
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState('');
   const [actionApiUrl, setActionApiUrl] = useState('');
-  const [showPopup, setShowPopup] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +23,7 @@ export default function ChatBox({ walletAddress }) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: userInput, walletAddress }), // Ensure this matches the expected format
+        body: JSON.stringify({ prompt: userInput, walletAddress }),
       });
 
       if (!response.ok) {
@@ -34,11 +33,9 @@ export default function ChatBox({ walletAddress }) {
       const result = await response.json();
       setResponse(result.message);
 
-      // Assuming the backend returns the action URL
       const newActionApiUrl = `http://localhost:3000/api/actions/${walletAddress}/buyNFT`;
-      console.log('Generated Action URL:', newActionApiUrl); // Log for debugging
+      console.log('Generated Action URL:', newActionApiUrl);
       setActionApiUrl(newActionApiUrl);
-      setShowPopup(true);
 
     } catch (error) {
       console.error('Error submitting prompt:', error);
@@ -62,11 +59,13 @@ export default function ChatBox({ walletAddress }) {
           {loading ? 'Processing...' : 'Submit'}
         </button>
       </form>
-      {response && <p>{response}</p>}
       {actionApiUrl && (
-        <p>
-          Action Link: <a href={actionApiUrl} target="_blank" rel="noopener noreferrer">{actionApiUrl}</a>
-        </p>
+        <div>
+          <p>
+            Action Link: <a href={actionApiUrl} target="_blank" rel="noopener noreferrer">{actionApiUrl}</a>
+          </p>
+          <BlinkPreview actionApiUrl={actionApiUrl} />
+        </div>
       )}
     </div>
   );
