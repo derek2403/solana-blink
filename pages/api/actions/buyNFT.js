@@ -19,15 +19,15 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-      icon: "a",
-      label: "b",
-      title: "c",
-      description: "d",
+        icon: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgz9hadyYQ1Y4Q_EKLx0nmtFXzcPWEAPpdBKGvHhsZAzh9d6FxSGOkuiBOu5zjYSoi3QX0a4HiHyvj0AHt5SCBK-1Er2Rh5Hx-vRU_o1QS75VFZwrn6LxggT2M3Cy0RrDFgBwUKK0ghfeCJ-AOydta-hoAOL15iVKlJ70GurI1AO7dBEuOP7tfSVJo2WlZ8/s320/blink.png",
+        label: "b",
+        title: "c",
+        description: "Cybersecurity Enthusiast | Support my research with a donation.",
       links: {
         actions: [
           {
             label: "e",
-            href: "/api/signTransaction",
+            href: "/api/donate",
           }
         ]
       }

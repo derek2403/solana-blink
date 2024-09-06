@@ -1,52 +1,74 @@
 import { useState } from 'react';
+import BlinkPreview from './DynamicBlink'; // Make sure the import path is correct
 
 export default function ChatBox({ walletAddress }) {
-    const [userInput, setUserInput] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState('');
+  const [userInput, setUserInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState('');
+  const [actionApiUrl, setActionApiUrl] = useState('');
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setLoading(true);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        try {
-            const response = await fetch('/api/extract-payload', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ prompt: userInput, walletAddress }), // Pass user input and wallet address
-            });
+    if (!userInput.trim()) {
+      setResponse('Prompt cannot be empty');
+      return;
+    }
 
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
+    setLoading(true);
 
-            const result = await response.json();
-            setResponse(result.message); // Success message from the backend
-        } catch (error) {
-            console.error('Error submitting prompt:', error);
-            setResponse('Failed to submit prompt');
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      const response = await fetch('/api/extract-payload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: userInput, walletAddress }),
+      });
 
-    return (
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setResponse(result.message);
+
+      const newActionApiUrl = `http://localhost:3000/api/actions/${walletAddress}/buyNFT`;
+      console.log('Generated Action URL:', newActionApiUrl);
+      setActionApiUrl(newActionApiUrl);
+
+    } catch (error) {
+      console.error('Error submitting prompt:', error);
+      setResponse('Failed to submit prompt');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          placeholder="What Blink should I generate?"
+          rows="4"
+          cols="50"
+          className={styles.animatedInput} // Apply the CSS class here
+        />
+        <button type="submit" disabled={loading || !walletAddress} className={styles.button}>
+          {loading ? 'Processing...' : 'Submit'}
+        </button>
+      </form>
+      {response && <p className={styles.response}>{response}</p>}
+      {actionApiUrl && (
         <div>
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    placeholder="Describe your NFT..."
-                    rows="4"
-                    cols="50"
-                />
-                <button type="submit" disabled={loading || !walletAddress}>
-                    {loading ? 'Processing...' : 'Submit'}
-                </button>
-            </form>
-            {response && <p>{response}</p>}
+          <p>
+            Action Link: <a href={actionApiUrl} target="_blank" rel="noopener noreferrer">{actionApiUrl}</a>
+          </p>
+          <BlinkPreview actionApiUrl={actionApiUrl} />
         </div>
-    );
+      )}
+    </div>
+  );
 }
