@@ -28,6 +28,8 @@ export default function handler(req, res) {
           {
             label: "e",
             href: "/api/donate",
+            label: "e",
+            href: "/api/donate",
           }
         ]
       }

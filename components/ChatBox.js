@@ -46,21 +46,19 @@ export default function ChatBox({ walletAddress }) {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <form onSubmit={handleSubmit}>
         <textarea
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder="What Blink should I generate?"
+          placeholder="Describe your NFT..."
           rows="4"
           cols="50"
-          className={styles.animatedInput} // Apply the CSS class here
         />
-        <button type="submit" disabled={loading || !walletAddress} className={styles.button}>
+        <button type="submit" disabled={loading || !walletAddress}>
           {loading ? 'Processing...' : 'Submit'}
         </button>
       </form>
-      {response && <p className={styles.response}>{response}</p>}
       {actionApiUrl && (
         <div>
           <p>

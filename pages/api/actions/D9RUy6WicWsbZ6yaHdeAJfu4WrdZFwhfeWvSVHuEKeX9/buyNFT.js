@@ -18,14 +18,14 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-  "icon": "a",
-  "label": "NFT Creation",
-  "title": "Untitled NFT",
-  "description": "No description provided.",
+  "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s",
+  "label": "nft",
+  "title": "exclusive shirt nft",
+  "description": "own a unique digital representation of a stylish shirt. perfect for collectors and fashion enthusiasts alike.",
   "links": {
     "actions": [
       {
-        "label": "Default Button Label",
+        "label": "mint your nft",
         "href": "/api/signTransaction"
       }
     ]
