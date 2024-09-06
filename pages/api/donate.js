@@ -1,4 +1,4 @@
-// pages/api/sign-transaction.js
+// pages/api/donate.js
 
 import { Connection, PublicKey, SystemProgram, Transaction } from '@solana/web3.js';
 

@@ -7,6 +7,10 @@
       {
         "pathPattern": "/api/actions/donate",
         "apiPath": "/api/actions/donate"
+      },
+      {
+        "pathPattern": "/api/actions/mintNFT",
+        "apiPath": "/api/actions/mintNFT"
       }
     ]
   }

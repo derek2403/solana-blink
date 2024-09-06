@@ -1,53 +1,23 @@
-import '@dialectlabs/blinks/index.css';
-import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-import { useState, useEffect } from 'react';
-import { Action, Blink, useAction } from "@dialectlabs/blinks";
-import { useActionSolanaWalletAdapter } from "@dialectlabs/blinks/hooks/solana";
+import React from 'react';
+import { MultiBlink } from '../components/BlinkComponent';
 
 export default function Home() {
-    const { publicKey, connected } = useWallet();
-    const walletAddress = connected && publicKey ? publicKey.toBase58() : 'Not connected';
+    const actionUrls = [
+        'https://dial.to/?action=solana-action:https://bonkbets.dial.to/ravens-vs-chiefs',
+        'https://dial.to/?action=solana-action:https://mint.solanaringers.art',
+        'https://dial.to/?action=solana-action:https://blink.sunrisestake.com/api/actions/stake',
+        'https://dial.to/?action=solana-action:https://api.mimirlab.xyz/v1/actions/',
+        'https://dial.to/?action=solana-action:https://tug-of-war.magicblock.app/api/v1/tug/item/DN4PPQ6MxAEy9sfrPRcrrxyoW8S2m5kX3NGfzrN3YMdQ',
+        'https://dial.to/?action=solana-action:https://www.dewicats.xyz/api/auction-blink',
+        'https://dial.to/?action=solana-action%3Ahttps%3A%2F%2Ftiplink.io%2Fapi%2Fblinks%2Fdonate%3Fdest%3D8QNrVY8L6bRRNCGMtBeACSDFh9bBd1R6mMp2tkdBCqYK'
 
-    const actionApiUrl = 'http://localhost:3000/api/actions/donate';
 
-    const { adapter } = useActionSolanaWalletAdapter('https://api.devnet.solana.com');
-    const { action, error } = useAction({ url: actionApiUrl, adapter });
 
-    useEffect(() => {
-        console.log('Action:', action);
-        console.log('Action error:', error);
-
-        if (action) {
-            console.log('Action title:', action.title);
-            console.log('Action description:', action.description);
-            console.log('Action links:', action.links);
-        }
-
-        // Manually fetch the action to see what's being returned
-        fetch(actionApiUrl)
-            .then(response => response.json())
-            .then(data => console.log('API response:', data))
-            .catch(error => console.error('API fetch error:', error));
-    }, [action, error, actionApiUrl]);
+    ];
 
     return (
         <div>
-            <WalletMultiButton />
-            <p>Connected: {connected.toString()}</p>
-            <p>Wallet Address: {walletAddress}</p>
-            {error && <p>Error: {error.message}</p>}
-            {action ? (
-                <div style={{ width: '500px', height: '200px' }}>
-                    <Blink
-                        action={action}
-                        websiteText={new URL(actionApiUrl).hostname}
-                        stylePreset="x-light"
-                    />
-                </div>
-            ) : (
-                <p>Loading Blink...</p>
-            )}
+            <MultiBlink actionUrls={actionUrls} />
         </div>
     );
 }

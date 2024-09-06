@@ -1,4 +1,4 @@
-// pages/api/actions/buyNFT.js
+// pages/api/actions/mint-nft.js
 
 import { ActionGetResponse } from "@solana/actions";
 
@@ -19,15 +19,15 @@ export default function handler(req, res) {
 
   if (req.method === 'GET') {
     const payload = {
-      icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s",
-      label: "DO BLINK!",
-      title: "DO BLINK!",
-      description: "This is Solandys demo blink.",
+      icon: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVFDIzi21sJX465lUyZGzE-0JB42J0mgisxg&s", // Replace with an actual NFT-related icon
+      label: "Mint NFT",
+      title: "Mint Your Unique NFT",
+      description: "Mint a special NFT for just 0.001 SOL!",
       links: {
         actions: [
           {
-            label: "Click me!",
-            href: "/api/signTransaction",
+            label: "Mint NFT (0.001 SOL)",
+            href: "/api/mintNFT",
           }
         ]
       }
